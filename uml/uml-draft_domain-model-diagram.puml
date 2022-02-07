@@ -1,0 +1,126 @@
+@startuml
+'https://plantuml.com/class-diagram
+'need this into unix systems
+!pragma layout smetana
+!include uml-style.iuml
+'- private
+'# protected
+'~ package private
+'+ public
+
+
+'ENTITY/MODEL
++class Kasse <entity_model> {
+  @Entity
+  --
+  @Id
+  -Integer id
+  ..
+  -Integer c1
+  -Integer c5
+  -Integer c10
+  -Integer c20
+  -Integer c50
+  -Integer c100
+  -Integer c200
+  ..
+}
+
++class Lager <entity_model> {
+  @Entity
+  --
+  @Id
+  -Integer id
+  ..
+  -GetraenkeSorten getraenkeSorte
+  -Integer menge
+  -private Double preis
+  ..
+}
+
+
+
+'SERVICE
++class KasseService <service> {
+  --
+  -KasseRepository kasseRepository
+  ..
+  +KasseDTO saveDTO(KasseDTO kasseDTO)
+  +KasseDTO kasseWerte()
+  +KasseDTO convertKasse2KasseDTO(Kasse kasse)
+  +Integer convertMuenzen2Cents(Kasse muenzen)
+  +Kasse convertCents2Muenzen(Integer cents)
+}
+
++class LagerService <service> {
+  --
+  -LagerRepository lagerRepository
+  ..
+  +LagerDTO saveDTO(LagerDTO lagerDTO)
+  +LagerDTO savePreisLagerDTO(LagerDTO lagerDTO)
+  +List<Lager> findAllLager()
+  +LagerDTO convertLager2LagerDTO(Lager lager)
+  +List<LagerDTO> convertListLager2ListLagerDTO(List<Lager> listLager)
+  +List<LagerDTO> findAllLagerDTO()
+  +Lager findLagerByGetraenkeSorte(GetraenkeSorten getraenkeSorte)
+  +Double findPreisByGetraenkeSorte(GetraenkeSorten getraenkeSorte)
+  +boolean checkGetraenkSorteLieferbar(GetraenkeSorten getraenkeSorte)
+  +void consumeGetraenkSorte(GetraenkeSorten getraenkeSorte)
+  
+}
+
++class EinkaufService <service> {
+  --
+  -LagerService lagerService
+  -KasseService kasseService
+  ..
+  +EinkaufDTO einkaufVerarbeiten(EinkaufDTO einkaufDTO)
+  +Integer convertPreis2Cents(GetraenkeSorten getraenkeSorte)
+}
+
+
+'CONTROLLER
+
++class KasseController <controller> {
+  @RestController
+  @RequestMapping("/kasse")
+  --
+  -KasseService kasseService;
+  ..
+  @PostMapping("/geld")
+  +KasseDTO saveKasse(@RequestBody KasseDTO kasseDTO)
+  
+  @GetMapping("/info")
+  +KasseDTO getKasseWerte()
+}
+
+
++class LagerController <controller> {
+  @RestController
+  @RequestMapping("/lager")
+  --
+  -LagerService lagerService
+  ..
+  @PostMapping
+  +LagerDTO saveLager(@RequestBody LagerDTO lagerDTO)
+  
+  @PostMapping("/preis")
+  +LagerDTO savePreis(@RequestBody LagerDTO lagerDTO)
+  
+  @GetMapping
+  +List<LagerDTO> getAllLager()
+}
+
+
++class EinkaufController <controller> {
+  @RestController
+  @RequestMapping("/kasse")
+  --
+  -EinkaufService einkaufService
+  ..
+  @PostMapping
+  +EinkaufDTO getraenkeEinkaufen(@RequestBody EinkaufDTO einkaufDTO)
+}
+
+
+@enduml

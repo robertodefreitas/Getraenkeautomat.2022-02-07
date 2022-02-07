@@ -1,0 +1,94 @@
+@startuml
+'https://plantuml.com/class-diagram
+'need this into unix systems
+'!pragma layout smetana
+!include uml-style.iuml
+'- private
+'# protected
+'~ package private
+'+ public
+
+circle circle
+annotation resources <files> {
+  application.properties
+  schema.sql
+  ..templates..
+  chat.html
+  login.html
+  signup.html
+  ..static..
+  /css
+  /js
+}
+
+'CLASSES
++class ImplementsTemplate {
+  -privateField
+  +String publicMethod(input)
+}
+
++class ExtendsTemplate implements ImplementsTemplate {
+  -privateField
+  +String publicMethod(input)
+}
+
++class TemplateClass <templatePackage> extends ExtendsTemplate {
+  --BEGIN--
+  ..
+  -privateField
+  #protectedField
+  ~package privateField
+  +publicField
+  --
+  {static} static or {classifier} classifier
+  {abstract} abstract
+  ==
+  -String privateMethod(input)
+  #String protectedMethod(input)
+  ~String packagePrivateMethod(input)
+  +String publicMethod(input)
+  ..END..
+}
+
++abstract class AbstractClass <<alternativ>> implements ImplementsTemplate {
+  -TemplateClass templateClass
+  +OtherClassConstructor(input)
+}
+
+enum TimeUnit {
+  DAYS
+  HOURS
+  MINUTES
+}
+
+annotation SuppressWarnings
+
+'RELATIONSHIP
+TemplateClass --|> AbstractClass
+'TemplateClass "abc" *..* "efg" ExtendsTemplate : extends
+'ExtendsTemplate ..|> ImplementsTemplate : implements >
+
+
+
+'NOTES
+note "NOTE: implements" as N1
+AbstractClass .. N1
+N1 .. ImplementsTemplate
+
+note top of ExtendsTemplate
+In java, <size:18>every</size> <u>class</u>
+  <b>extends</b>
+  <i>this</i> one
+end note
+
+note left
+  This is **bold**
+  This is //italics//
+  This is ""monospaced""
+  This is --stricken-out--
+  This is __underlined__
+  This is ~~wave-underlined~~
+end note
+
+
+@enduml

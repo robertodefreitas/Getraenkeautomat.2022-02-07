@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+'need this into unix systems
+!pragma layout smetana
+!include uml-style.iuml
+'- private
+'# protected
+'~ package private
+'+ public
+
+'MAIN
+
++class Getraenkeautomat <L1> {
+  -Kasse kasse
+  -Fach fach
+  +void Einkaufen(Fach-ID,Muenzen)
+}
+
++class Muenzen <L2> {
+  -int c10Menge
+  -int c20Menge
+  -int c50Menge
+  -int c100Menge
+  -int c200Menge
+  +int get...()
+  +set...(int)
+}
+
++class Kasse <L2> {
+  -Muenzen vorhandeneMuenzen
+  +Muenzen umwandelnPreis2Muenzen(double)
+  +double umwandelnMuenzen2Preis(Muenzen)
+  '+wechselgeldBerechnen(Fach, Muenzen)
+  +boi
+
+}
+
+
+
+'Comment
+DogController <|-- DogService
+DogServiceImpl <|-- Dog
+DogServiceImpl <|-- DogRepository
+
+@enduml

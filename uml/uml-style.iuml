@@ -1,0 +1,21 @@
+'https://plantuml.com/de/skinparam
+'skinparam backgroundColor transparent
+'skinparam monochrome true
+'skinparam shadowing false
+'skinparam classAttributeIconSize 0
+'skinparam DefaultFontName arial
+'skinparam DefaultFontSize 12
+'skinparam ClassFontStyle bold
+'hide empty fields
+'hide circle
+
+skinparam backgroundColor white
+skinparam roundcorner 20
+skinparam monochrome false
+skinparam shadowing true
+skinparam classAttributeIconSize 10
+skinparam DefaultFontName arial
+skinparam DefaultFontSize 12
+skinparam ClassFontStyle bold
+hide empty fields
+hide circle
