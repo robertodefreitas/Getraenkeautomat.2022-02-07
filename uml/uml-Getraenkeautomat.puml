@@ -10,36 +10,70 @@
 
 'MAIN
 
-+class Getraenkeautomat <L1> {
-  -Kasse kasse
-  -Fach fach
-  +void Einkaufen(Fach-ID,Muenzen)
++class Getraenkeautomat <main> {
+  +void Einkaufen(Fach fach,Muenzen muenzen, Kasse kasse)
 }
 
-+class Muenzen <L2> {
+'KASSE
+
++class Muenzen <kasse> {
   -int c10Menge
   -int c20Menge
   -int c50Menge
   -int c100Menge
   -int c200Menge
+  +Muenzen()
+  +Muenzen(int c10Menge, int ...)
   +int get...()
-  +set...(int)
+  +void set...(int ...)
+  +setMuenze(int muenze, int anzahl)
+  +int umwandelGeldBetrag2Cents(double geldBetrag)
+  +Muenzen umwandelnGeldBetrag2Muenzen(double geldBetrag)
+  +double umwandelnCents2GeldBetrag(int geldBetragCents)
+  +double umwandelnMuenzen2GeldBetrag()
 }
 
-+class Kasse <L2> {
++class Kasse <kasse> {
   -Muenzen vorhandeneMuenzen
-  +Muenzen umwandelnPreis2Muenzen(double)
-  +double umwandelnMuenzen2Preis(Muenzen)
-  '+wechselgeldBerechnen(Fach, Muenzen)
-  +boi
+  +Kasse()
+  +Kasse(Muenzen vorhandeneMuenzen)
+  +Muenzen getVorhandeneMuenzen()
+  +void setVorhandeneMuenzen(Muenzen vorhandeneMuenzen)
+  +void muenzenHinzufuegen(Muenzen muenzen)
+  +void muenzuenAbziehen(Muenzen muenzen)
+  +double summeKasseBetrag
 
 }
 
+'LAGER
+
++class Fach <lager> extends GetraenkeLager {
+  -int id
+  -int menge
+  -double preis
+  +Fach()
+  +Fach(int id, int menge, double preis)
+  +int get...()
+  +void set...(int ...)
+  +boolen istGetraenkeVorhanden()
+  +void getraenkeKonsumieren()
+  +boolen einzahlungAusreichend(double einzahlung)
+}
+
++class GetraenkeLager <lager> {
+  -int mengeSumme
+  -int mengeFaecher
+  +GetraenkeLager()
+  +GetraenkeLager(int mengeSumme, Integer mengeFaecher)
+  +int get...()
+  +void set...(int ...)
+}
 
 
 'Comment
-DogController <|-- DogService
-DogServiceImpl <|-- Dog
-DogServiceImpl <|-- DogRepository
+Muenzen <|-- Getraenkeautomat
+Muenzen <|-- Kasse
+Fach <|-- Getraenkeautomat
+Kasse <|-- Getraenkeautomat
 
 @enduml
