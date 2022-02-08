@@ -8,11 +8,19 @@
 '~ package private
 '+ public
 
-'MAIN
+'ROOT/MAIN
 
-+class Getraenkeautomat <main> {
++class Getraenkeautomat <root> {
+  -List<Getraenkewunsch> getraenkewuensche
   -Kasse kasse
-  +void Einkaufen(Fach fach,Muenzen muenzen)
+  +Getraenkeautomat()
+  +Getraenkeautomat(List<Getraenkewunsch> getraenkewuensche, Kasse kasse)
+  +int get..()
+  +void set..(int ..)
+  +Getraenkewunsch getraenkSuchen(String auswahl)
+  +Integer summeAllerGetraenkewunsch()
+  +Integer summeAllerGetraenke()
+  +GetraenkUndWechselgeld kaufen(Getraenkewunsch auswahl, Muenzen einzahlung)
 }
 
 'KASSE
@@ -25,8 +33,8 @@
   -int c200Menge
   +Muenzen()
   +Muenzen(int c10Menge, int ...)
-  +int get...()
-  +void set...(int ...)
+  +int get..()
+  +void set..(int ..)
   +setMuenze(int muenze, int anzahl)
   +int umwandelGeldBetrag2Cents(double geldBetrag)
   +Muenzen umwandelnGeldBetrag2Muenzen(double geldBetrag)
@@ -42,42 +50,46 @@
   +void setVorhandeneMuenzen(Muenzen vorhandeneMuenzen)
   +void muenzenHinzufuegen(Muenzen muenzen)
   +void muenzuenAbziehen(Muenzen muenzen)
-  +double summeKasseBetrag
+  +double summeKasseBetrag()
 
 }
 
 'LAGER
 
-+class Fach <lager> extends Getraenkelager {
-  -int id
-  -int menge
-  -double preis
-  +Fach()
-  +Fach(int id, int menge, double preis)
-  +int get...()
-  +void set...(int ...)
++class Getraenkewunsch <lager> {
+  -int getraenkeId
+  -String getraenkeName
+  -int getraenkeMenge
+  -double getraenkePreis
+  +Getraenkewunsch()
+  +Getraenkewunsch(int getraenkeId, String getraenkeName, int getraenkeMenge, double getraenkePreis)
+  +int get..()
+  +void set..(int ..)
   +boolen istGetraenkeVorhanden()
   +void getraenkeKonsumieren()
   +boolen einzahlungAusreichend(double einzahlung)
 }
 
-+class Getraenkelager <lager> {
-  -int mengeSumme
-  -int mengeFaecher
-  +GetraenkeLager()
-  +GetraenkeLager(int mengeSumme, Integer mengeFaecher)
-  +int get...()
-  +void set...(int ...)
++class GetraenkUndWechselgeld <root> {
+  -String getraenk
+  -double wechselgeld
+  +GetraenkUndWechselgeld()
+  +GetraenkUndWechselgeld(String getraenk, Double wechselgeld)
+  +int get.. ()
+  +void set.. (int ..)
 }
 
 
 'Comment
 'association offen: -->
-Muenzen <-- Getraenkeautomat
-Muenzen <-- Kasse
-Fach "n" <-- Getraenkeautomat
+Getraenkeautomat --> "1" Muenzen
+Getraenkeautomat --> "1" Kasse:besitzt
+Getraenkeautomat --> "n" Getraenkewunsch
+Getraenkeautomat --> "1" GetraenkUndWechselgeld
+Kasse --> "6" Muenzen
+
 'besondere beziehung, Komposition
 '1: eine Kasse
-Kasse "1" <-- Getraenkeautomat:besitzt
+
 
 @enduml
