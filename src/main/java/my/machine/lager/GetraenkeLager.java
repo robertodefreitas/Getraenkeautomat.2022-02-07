@@ -1,8 +1,8 @@
 package my.machine.lager;
 
 class GetraenkeLager {
-    public Integer mengeSumme;
-    public Integer mengeFaecher;
+    private Integer mengeSumme;
+    private Integer mengeFaecher;
 
     /* constructor */
 

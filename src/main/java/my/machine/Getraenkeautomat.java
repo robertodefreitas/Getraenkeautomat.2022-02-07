@@ -50,7 +50,7 @@ public class Getraenkeautomat {
                 wechselGeldMuenzen = wechselGeldMuenzen.umwandelnGeldBetrag2Muenzen(wechselGeldBetrag);
                 kasse.muenzenAbziehen(wechselGeldMuenzen);
 
-                System.out.println("INFO [" + methodeName + "] Wechselgeld: " + wechselGeldBetrag);
+                System.out.println("INFO [" + methodeName + "] Wechselgeld: " + wechselGeldMuenzen.umwandelnMuenzen2GeldBetrag());
 
                 System.out.println("INFO [" + methodeName + "] Der Einkauf ist erfolgreich abgeschlossen.");
 

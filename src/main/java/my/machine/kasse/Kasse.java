@@ -42,4 +42,11 @@ public class Kasse {
         this.vorhandeneMuenzen.c100Menge = this.vorhandeneMuenzen.c100Menge - muenzen.c100Menge;
         this.vorhandeneMuenzen.c200Menge = this.vorhandeneMuenzen.c200Menge - muenzen.c200Menge;
     }
+
+    public Double summeKasseBetrag(){
+        String methodeName = new Object(){}.getClass().getEnclosingMethod().getName();
+        Double summeBetrag = this.vorhandeneMuenzen.umwandelnMuenzen2GeldBetrag();
+        System.out.println("WARN [" + methodeName + "] die Betragsumme der Kasse: " + summeBetrag);
+        return summeBetrag;
+    }
 }
