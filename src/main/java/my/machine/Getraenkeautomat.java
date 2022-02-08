@@ -1,5 +1,12 @@
 package my.machine;
 
+import my.machine.kasse.Kasse;
+import my.machine.kasse.Muenzen;
+import my.machine.lager.Fach;
+// java: my.machine.lager.GetraenkeLager is not public in my.machine.lager;
+// cannot be accessed from outside package
+//import my.machine.lager.GetraenkeLager;
+
 public class Getraenkeautomat {
 
     public static void main(String[] args) {
@@ -8,8 +15,13 @@ public class Getraenkeautomat {
 
 //        Muenzen muenzenStartKasse = new Muenzen(10,10,10,10,10);
 //        Kasse kasse = new Kasse(muenzenStartKasse);
+//
+//        //GetraenkeLager getraenkeLager = new GetraenkeLager();
 //        Fach wasser = new Fach(1,5,1.234);
 //        Fach cola = new Fach(2,5,2.1);
+//
+//        //System.out.println("INFO [" + methodeName + "] Summe alle Fächer: " + GetraenkeLager.getMengeSumme());
+//        System.out.println("INFO [" + methodeName + "] Summe alle Fächer: " + cola.getMengeSumme());
 //
 //        Muenzen einzahlungMuenzen = new Muenzen(0,0,0,0,1);
 //        Einkaufen(cola, einzahlungMuenzen, kasse);

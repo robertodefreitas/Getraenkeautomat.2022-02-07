@@ -1,4 +1,4 @@
-package my.machine;
+package my.machine.kasse;
 
 public class Muenzen {
     Integer c10Menge;

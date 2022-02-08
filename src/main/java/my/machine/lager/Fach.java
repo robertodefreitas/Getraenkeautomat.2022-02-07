@@ -1,6 +1,6 @@
-package my.machine;
+package my.machine.lager;
 
-public class Fach {
+public class Fach extends GetraenkeLager {
 
     Integer id;
     Integer menge;
@@ -15,6 +15,9 @@ public class Fach {
         this.id = id;
         this.menge = menge;
         this.preis = preis;
+
+        setMengeSumme(getMengeSumme() + this.menge);
+        setMengeFaecher(getMengeFaecher() +1 );
     }
 
 
