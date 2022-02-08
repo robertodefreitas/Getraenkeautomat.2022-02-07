@@ -9,8 +9,10 @@ import static my.machine.Getraenkeautomat.Einkaufen;
 
 public class GetraenkeautomatUnitTest {
 
-    private Integer fachId = 0; // started
+    private Integer fachId = 0; // Kasse is initialisiert
     private Kasse kasse = kasseErstellen();
+
+    /* TESTS */
 
     @Test
     public void fachErstellungTest(){
@@ -29,9 +31,9 @@ public class GetraenkeautomatUnitTest {
         Fach wasser = fachErstellen(5,1.234);
         Muenzen einzahlungMuenzen = muenzenErstellen();
 
-        Double kasseBetragVorEinkaufen = this.kasse.summeKasseBetrag();
-        Einkaufen(wasser, einzahlungMuenzen, this.kasse);
-        Double kasseBetragNachEinkaufen = this.kasse.summeKasseBetrag();
+        Double kasseBetragVorEinkaufen = kasse.summeKasseBetrag();
+        Einkaufen(wasser, einzahlungMuenzen, kasse);
+        Double kasseBetragNachEinkaufen = kasse.summeKasseBetrag();
 
         Assertions.assertNotEquals(kasseBetragVorEinkaufen, kasseBetragNachEinkaufen);
     }
@@ -41,14 +43,31 @@ public class GetraenkeautomatUnitTest {
         Fach cola = fachErstellen(4,1.99);
         Muenzen einzahlungMuenzen = muenzenErstellen();
 
-        Double kasseBetragVorEinkaufen = this.kasse.summeKasseBetrag();
-        Einkaufen(cola, einzahlungMuenzen, this.kasse);
-        Double kasseBetragNachEinkaufen = this.kasse.summeKasseBetrag();
+        Double kasseBetragVorEinkaufen = kasse.summeKasseBetrag();
+        Einkaufen(cola, einzahlungMuenzen, kasse);
+        Double kasseBetragNachEinkaufen = kasse.summeKasseBetrag();
 
         Assertions.assertEquals(kasseBetragVorEinkaufen, kasseBetragNachEinkaufen);
     }
 
-    private static Kasse kasseErstellen() {
+    @Test
+    public void fachMengeTest(){
+        //Kasse kasse = kasseErstellen();
+        Fach wasser = fachErstellen(5,1.234);
+        Muenzen einzahlungMuenzen = muenzenErstellen();
+
+        Integer mengeVorEinkaufen = wasser.getMenge();
+        Einkaufen(wasser, einzahlungMuenzen, this.kasse);
+        Integer mengeNachEinkaufen = wasser.getMenge();
+
+        Assertions.assertNotEquals(mengeVorEinkaufen,mengeNachEinkaufen);
+        Assertions.assertTrue(wasser.getMenge() == 4);
+    }
+
+
+    /* METHODS */
+
+    private Kasse kasseErstellen() {
         Muenzen muenzenStartKasse = new Muenzen(10,10,10,10,10);
         return new Kasse(muenzenStartKasse);
     }
