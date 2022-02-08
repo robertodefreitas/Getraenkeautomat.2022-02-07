@@ -13,10 +13,6 @@
 +class Getraenkeautomat <root> {
   -List<Getraenkewunsch> getraenkewuensche
   -Kasse kasse
-  +Getraenkeautomat()
-  +Getraenkeautomat(List<Getraenkewunsch> getraenkewuensche, Kasse kasse)
-  +int get..()
-  +void set..(int ..)
   +Getraenkewunsch getraenkSuchen(String auswahl)
   +Integer summeAllerGetraenkewunsch()
   +Integer summeAllerGetraenke()
@@ -31,10 +27,6 @@
   -int c50Menge
   -int c100Menge
   -int c200Menge
-  +Muenzen()
-  +Muenzen(int c10Menge, int ...)
-  +int get..()
-  +void set..(int ..)
   +setMuenze(int muenze, int anzahl)
   +int umwandelGeldBetrag2Cents(double geldBetrag)
   +Muenzen umwandelnGeldBetrag2Muenzen(double geldBetrag)
@@ -44,8 +36,6 @@
 
 +class Kasse <kasse> {
   -Muenzen vorhandeneMuenzen
-  +Kasse()
-  +Kasse(Muenzen vorhandeneMuenzen)
   +Muenzen getVorhandeneMuenzen()
   +void setVorhandeneMuenzen(Muenzen vorhandeneMuenzen)
   +void muenzenHinzufuegen(Muenzen muenzen)
@@ -61,10 +51,6 @@
   -String getraenkeName
   -int getraenkeMenge
   -double getraenkePreis
-  +Getraenkewunsch()
-  +Getraenkewunsch(int getraenkeId, String getraenkeName, int getraenkeMenge, double getraenkePreis)
-  +int get..()
-  +void set..(int ..)
   +boolen istGetraenkeVorhanden()
   +void getraenkeKonsumieren()
   +boolen einzahlungAusreichend(double einzahlung)
@@ -73,10 +59,6 @@
 +class GetraenkUndWechselgeld <root> {
   -String getraenk
   -double wechselgeld
-  +GetraenkUndWechselgeld()
-  +GetraenkUndWechselgeld(String getraenk, Double wechselgeld)
-  +int get.. ()
-  +void set.. (int ..)
 }
 
 
