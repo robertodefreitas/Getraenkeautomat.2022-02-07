@@ -13,20 +13,23 @@ public class Getraenkeautomat {
         String methodeName = new Object(){}.getClass().getEnclosingMethod().getName();
         System.out.println("INFO [" + methodeName + "] Getränkeautomat ist gestartet...");
 
-//        Muenzen muenzenStartKasse = new Muenzen(10,10,10,10,10);
-//        Kasse kasse = new Kasse(muenzenStartKasse);
-//
-//        //GetraenkeLager getraenkeLager = new GetraenkeLager();
-//        Fach wasser = new Fach(1,5,1.234);
-//        Fach cola = new Fach(2,5,2.1);
-//
-//        //System.out.println("INFO [" + methodeName + "] Summe alle Fächer: " + GetraenkeLager.getMengeSumme());
-//        System.out.println("INFO [" + methodeName + "] Summe alle Fächer: " + cola.getMengeSumme());
-//
-//        Muenzen einzahlungMuenzen = new Muenzen(0,0,0,0,1);
-//        Einkaufen(cola, einzahlungMuenzen, kasse);
-//        Einkaufen(wasser, einzahlungMuenzen, kasse);
-//        System.out.println("INFO [" + methodeName + "] Getränkeautomat ist fertig.");
+        Muenzen muenzenStartKasse = new Muenzen(10,10,10,10,10);
+        Kasse kasse = new Kasse(muenzenStartKasse);
+
+        //GetraenkeLager getraenkeLager = new GetraenkeLager();
+        Fach wasser = new Fach(1,5,1.234);
+        Fach cola = new Fach(2,5,1.0);
+
+        //System.out.println("INFO [" + methodeName + "] Summe alle Fächer: " + GetraenkeLager.getMengeSumme());
+        System.out.println("INFO [" + methodeName + "] Summe alle Fächer: " + cola.getMengeSumme());
+
+        Muenzen einzahlungMuenzen = new Muenzen(0,0,0,0,1);
+        System.out.println("INFO [" + methodeName + "] Kassebetrag: " + kasse.summeKasseBetrag());
+        Einkaufen(cola, einzahlungMuenzen, kasse);
+        System.out.println("INFO [" + methodeName + "] Kassebetrag: " + kasse.summeKasseBetrag());
+        Einkaufen(wasser, einzahlungMuenzen, kasse);
+        System.out.println("INFO [" + methodeName + "] Kassebetrag: " + kasse.summeKasseBetrag());
+        System.out.println("INFO [" + methodeName + "] Getränkeautomat ist fertig.");
     }
 
     public static void Einkaufen(Fach fach, Muenzen einzahlungMuenzen, Kasse kasse){

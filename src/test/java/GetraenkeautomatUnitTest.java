@@ -40,7 +40,7 @@ public class GetraenkeautomatUnitTest {
 
     @Test
     public void einkaufenGeldNichtAusreichendTest(){
-        Fach cola = fachErstellen(4,1.99);
+        Fach cola = fachErstellen(4,2.01);
         Muenzen einzahlungMuenzen = muenzenErstellen();
 
         Double kasseBetragVorEinkaufen = kasse.summeKasseBetrag();
@@ -57,7 +57,7 @@ public class GetraenkeautomatUnitTest {
         Muenzen einzahlungMuenzen = muenzenErstellen();
 
         Integer mengeVorEinkaufen = wasser.getMenge();
-        Einkaufen(wasser, einzahlungMuenzen, this.kasse);
+        Einkaufen(wasser, einzahlungMuenzen, kasse);
         Integer mengeNachEinkaufen = wasser.getMenge();
 
         Assertions.assertNotEquals(mengeVorEinkaufen,mengeNachEinkaufen);
@@ -78,7 +78,7 @@ public class GetraenkeautomatUnitTest {
     }
 
     private Muenzen muenzenErstellen() {
-        return new Muenzen(0,0,1,1,0);
+        return new Muenzen(1,2,1,1,0);
     }
 
 }
