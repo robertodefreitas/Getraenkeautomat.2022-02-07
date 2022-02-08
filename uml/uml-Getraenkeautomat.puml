@@ -11,7 +11,8 @@
 'MAIN
 
 +class Getraenkeautomat <main> {
-  +void Einkaufen(Fach fach,Muenzen muenzen, Kasse kasse)
+  -Kasse kasse
+  +void Einkaufen(Fach fach,Muenzen muenzen)
 }
 
 'KASSE
@@ -47,7 +48,7 @@
 
 'LAGER
 
-+class Fach <lager> extends GetraenkeLager {
++class Fach <lager> extends Getraenkelager {
   -int id
   -int menge
   -double preis
@@ -60,7 +61,7 @@
   +boolen einzahlungAusreichend(double einzahlung)
 }
 
-+class GetraenkeLager <lager> {
++class Getraenkelager <lager> {
   -int mengeSumme
   -int mengeFaecher
   +GetraenkeLager()
@@ -71,9 +72,12 @@
 
 
 'Comment
-Muenzen <|-- Getraenkeautomat
-Muenzen <|-- Kasse
-Fach <|-- Getraenkeautomat
-Kasse <|-- Getraenkeautomat
+'association offen: -->
+Muenzen <-- Getraenkeautomat
+Muenzen <-- Kasse
+Fach "n" <-- Getraenkeautomat
+'besondere beziehung, Komposition
+'1: eine Kasse
+Kasse "1" <-- Getraenkeautomat:besitzt
 
 @enduml

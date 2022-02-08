@@ -2,69 +2,145 @@ package my.machine;
 
 import my.machine.kasse.Kasse;
 import my.machine.kasse.Muenzen;
-import my.machine.lager.Fach;
-// java: my.machine.lager.GetraenkeLager is not public in my.machine.lager;
-// cannot be accessed from outside package
-//import my.machine.lager.GetraenkeLager;
+import my.machine.lager.Getraenkewunsch;
+
+import java.util.List;
 
 public class Getraenkeautomat {
 
-    public static void main(String[] args) {
-        String methodeName = new Object(){}.getClass().getEnclosingMethod().getName();
-        System.out.println("INFO [" + methodeName + "] Getränkeautomat ist gestartet...");
+    /**
+     * List mit Getränkewunsch erstellen
+     * weil mehrere Getränkesorten zum Auswahl geben soll
+     */
+    private List<Getraenkewunsch> getraenkewuensche;
 
-        Muenzen muenzenStartKasse = new Muenzen(10,10,10,10,10);
-        Kasse kasse = new Kasse(muenzenStartKasse);
+    /**
+     * Kasse für die gesammte Getraenkeautomat wird initialisiert
+     */
+    private Kasse kasse;
 
-        //GetraenkeLager getraenkeLager = new GetraenkeLager();
-        Fach wasser = new Fach(1,5,1.234);
-        Fach cola = new Fach(2,5,1.0);
 
-        //System.out.println("INFO [" + methodeName + "] Summe alle Fächer: " + GetraenkeLager.getMengeSumme());
-        System.out.println("INFO [" + methodeName + "] Summe alle Fächer: " + cola.getMengeSumme());
+    /* constructor */
 
-        Muenzen einzahlungMuenzen = new Muenzen(0,0,0,0,1);
-        System.out.println("INFO [" + methodeName + "] Kassebetrag: " + kasse.summeKasseBetrag());
-        Einkaufen(cola, einzahlungMuenzen, kasse);
-        System.out.println("INFO [" + methodeName + "] Kassebetrag: " + kasse.summeKasseBetrag());
-        Einkaufen(wasser, einzahlungMuenzen, kasse);
-        System.out.println("INFO [" + methodeName + "] Kassebetrag: " + kasse.summeKasseBetrag());
-        System.out.println("INFO [" + methodeName + "] Getränkeautomat ist fertig.");
+    public Getraenkeautomat(){}
+
+    public Getraenkeautomat(List<Getraenkewunsch> getraenkewuensche, Kasse kasse) {
+        this.kasse = kasse;
+        this.getraenkewuensche = getraenkewuensche;
     }
 
-    public static void Einkaufen(Fach fach, Muenzen einzahlungMuenzen, Kasse kasse){
+
+    /* getters and setters */
+
+    public List<Getraenkewunsch> getGetraenkewuensche() {
+        return getraenkewuensche;
+    }
+
+    public void setGetraenkewuensche(List<Getraenkewunsch> getraenkewuensche) {
+        this.getraenkewuensche = getraenkewuensche;
+    }
+
+    public Kasse getKasse() {
+        return kasse;
+    }
+
+    public void setKasse(Kasse kasse) {
+        this.kasse = kasse;
+    }
+
+
+    /* methods */
+
+    public Getraenkewunsch getraenkSuchen(String auswahl){
+//        for (Getraenkewunsch getraenkewunsch : getraenkewuensche){
+//            if (getraenkewunsch.getGetraenkeName().equals(auswahl)){
+//                return getraenkewunsch;
+//            }
+//        }
+        Getraenkewunsch getraenkewunschGefunden = getraenkewuensche.stream()
+                //.filter(Getraenkewunsch -> "apfelschorle".equals(Getraenkewunsch.getGetraenkeName()))
+                .filter(Getraenkewunsch -> auswahl.equals(Getraenkewunsch.getGetraenkeName()))
+                .findAny()
+                .orElse(null);
+        return getraenkewunschGefunden;
+    }
+
+    public Integer summeAllerGetraenkewunsch(){
         String methodeName = new Object(){}.getClass().getEnclosingMethod().getName();
 
-        Double einzahlungBetrag = einzahlungMuenzen.umwandelnMuenzen2GeldBetrag();
+        Integer summeGetraenkewunsch = getraenkewuensche.size();
 
-        if (fach.einzahlungAusreichend(einzahlungBetrag)){
+        System.out.println("INFO [" + methodeName + "] Summe aller Getränke im Getränkeautomat: " + summeGetraenkewunsch);
+        return summeGetraenkewunsch;
+    }
+
+    public Integer summeAllerGetraenke(){
+        String methodeName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+        // https://www.baeldung.com/java-stream-sum
+        Integer summe = getraenkewuensche.stream()
+                .map(getraenkewunsch -> getraenkewunsch.getGetraenkeMenge())
+                .reduce(0,Integer::sum);
+
+        System.out.println("INFO [" + methodeName + "] Summe aller Getränke im Getränkeautomat: " + summe);
+        return summe;
+    }
+
+    public GetraenkUndWechselgeld kaufen(Getraenkewunsch auswahl, Muenzen einzahlung){
+        String methodeName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+        Double einzahlungBetrag = einzahlung.umwandelnMuenzen2GeldBetrag();
+
+        if (auswahl.einzahlungAusreichend(einzahlungBetrag)){
             System.out.println("INFO [" + methodeName + "] Es ist genug geld vorhanden.");
 
-            if (fach.istGetraenkeVorhanden()){
+            if (auswahl.istGetraenkeVorhanden()){
                 System.out.println("INFO [" + methodeName + "] Es ist genug Getränke vorhanden.");
 
-                fach.getraenkeKonsumieren();
-                kasse.muenzenHinzufuegen(einzahlungMuenzen);
+                auswahl.getraenkeKonsumieren();
+                kasse.muenzenHinzufuegen(einzahlung);
 
                 // wechselgeld wird berechnet
-                Double wechselGeldBetrag = einzahlungBetrag - fach.getPreis();
+                Double wechselGeldBetrag = einzahlungBetrag - auswahl.getGetraenkePreis();
 
                 Muenzen wechselGeldMuenzen = new Muenzen();
                 wechselGeldMuenzen = wechselGeldMuenzen.umwandelnGeldBetrag2Muenzen(wechselGeldBetrag);
                 kasse.muenzenAbziehen(wechselGeldMuenzen);
 
                 System.out.println("INFO [" + methodeName + "] Wechselgeld: " + wechselGeldMuenzen.umwandelnMuenzen2GeldBetrag());
-
                 System.out.println("INFO [" + methodeName + "] Der Einkauf ist erfolgreich abgeschlossen.");
+
+                GetraenkUndWechselgeld getraenkUndWechselgeld =
+                        new GetraenkUndWechselgeld(
+                                auswahl.getGetraenkeName(),
+                                wechselGeldMuenzen.umwandelnMuenzen2GeldBetrag()
+                        );
+                return getraenkUndWechselgeld;
 
             } else {
                 System.out.println("WARN [" + methodeName + "] Es ist nicht genug Getränke vorhaden.");
                 System.out.println("WARN [" + methodeName + "] Einkauf ist abgebrochen");
+
+                GetraenkUndWechselgeld getraenkUndWechselgeld =
+                        new GetraenkUndWechselgeld(
+                                "KEIN_GETRAENK",
+                                einzahlungBetrag
+                        );
+                return getraenkUndWechselgeld;
             }
 
         } else {
             System.out.println("WARN [" + methodeName + "] Der Geldbetrag ist nicht ausreichend.");
             System.out.println("WARN [" + methodeName + "] Einkauf ist abgebrochen");
+
+            GetraenkUndWechselgeld getraenkUndWechselgeld =
+                    new GetraenkUndWechselgeld(
+                            "KEIN_GETRAENK",
+                            einzahlungBetrag
+                    );
+            return getraenkUndWechselgeld;
         }
     }
+
+
 }

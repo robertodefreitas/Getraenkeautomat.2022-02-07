@@ -64,7 +64,8 @@ enum TimeUnit {
 annotation SuppressWarnings
 
 'RELATIONSHIP
-TemplateClass --|> AbstractClass
+TemplateClass "A" --|> "B" AbstractClass
+TemplateClass --> "1" AbstractClass:description
 'TemplateClass "abc" *..* "efg" ExtendsTemplate : extends
 'ExtendsTemplate ..|> ImplementsTemplate : implements >
 
