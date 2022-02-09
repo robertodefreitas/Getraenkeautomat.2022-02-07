@@ -2,7 +2,7 @@
 'https://plantuml.com/class-diagram
 'need this into unix systems
 '!pragma layout smetana
-!include uml-style.iuml
+!include ../uml-style.iuml
 '- private
 '# protected
 '~ package private
@@ -63,14 +63,6 @@ enum TimeUnit {
 
 annotation SuppressWarnings
 
-'RELATIONSHIP
-TemplateClass "A" --|> "B" AbstractClass
-TemplateClass --> "1" AbstractClass:description
-'TemplateClass "abc" *..* "efg" ExtendsTemplate : extends
-'ExtendsTemplate ..|> ImplementsTemplate : implements >
-
-
-
 'NOTES
 note "NOTE: implements" as N1
 AbstractClass .. N1
@@ -91,5 +83,21 @@ note left
   This is ~~wave-underlined~~
 end note
 
+
+'RELATIONSHIP
+TemplateClass "A" --|> "B" AbstractClass
+TemplateClass --> "1" AbstractClass:description
+'TemplateClass "abc" *..* "efg" ExtendsTemplate : extends
+'ExtendsTemplate ..|> ImplementsTemplate : implements >
+
+'https://www.geeksforgeeks.org/association-composition-aggregation-java/
+'https://info-wsf.de/assoziation-aggregation-und-komposition/
+'Komposition
+Class --* Composition
+'Aggregation
+Class --o Aggregation
+'Assoziation
+Class --> Association
+Class --|> Extension
 
 @enduml

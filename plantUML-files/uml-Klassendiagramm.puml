@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include uml-style.iuml
+'need this into unix systems
+!pragma layout smetana
+'- private
+'# protected
+'~ package private
+'+ public
+
+'ROOT/MAIN
+
++class Getraenkeautomat <root> {
+}
+
++class GetraenkUndWechselgeld <root> {
+}
+
+'KASSE
+
++class Muenzen <kasse> {
+}
+
++class Kasse <kasse> {
+}
+
+'LAGER
+
++class Getraenkewunsch <lager> {
+}
+
+'RELATIONSHIP
+'https://info-wsf.de/assoziation-aggregation-und-komposition/
+'https://www.geeksforgeeks.org/association-composition-aggregation-java/
+'Komposition
+'Class --* Composition
+'Aggregation
+'Class --o Aggregation
+'Assoziation
+'Class --> Association
+'Class --|> Extension
+
+'association offen: -->
+'Getraenkeautomat --> "1" Kasse:besitzt
+Getraenkeautomat --> "1" Kasse
+Getraenkeautomat --> "n" Getraenkewunsch
+Getraenkeautomat --> "1" GetraenkUndWechselgeld
+Kasse --> "1" Muenzen
+'besondere beziehung, Komposition
+'1: eine Kasse
+
+@enduml

@@ -1,8 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
+!include uml-style.iuml
 'need this into unix systems
 !pragma layout smetana
-!include uml-style.iuml
 '- private
 '# protected
 '~ package private
@@ -17,6 +17,11 @@
   +Integer summeAllerGetraenkewunsch()
   +Integer summeAllerGetraenke()
   +GetraenkUndWechselgeld kaufen(Getraenkewunsch auswahl, Muenzen einzahlung)
+}
+
++class GetraenkUndWechselgeld <root> {
+  -String getraenk
+  -double wechselgeld
 }
 
 'KASSE
@@ -36,8 +41,6 @@
 
 +class Kasse <kasse> {
   -Muenzen vorhandeneMuenzen
-  +Muenzen getVorhandeneMuenzen()
-  +void setVorhandeneMuenzen(Muenzen vorhandeneMuenzen)
   +void muenzenHinzufuegen(Muenzen muenzen)
   +void muenzuenAbziehen(Muenzen muenzen)
   +double summeKasseBetrag()
@@ -56,22 +59,14 @@
   +boolen einzahlungAusreichend(double einzahlung)
 }
 
-+class GetraenkUndWechselgeld <root> {
-  -String getraenk
-  -double wechselgeld
-}
 
-
-'Comment
-'association offen: -->
+'RELATIONSHIP
+'https://info-wsf.de/assoziation-aggregation-und-komposition/
+'https://www.geeksforgeeks.org/association-composition-aggregation-java/
 Getraenkeautomat --> "1" Muenzen
-Getraenkeautomat --> "1" Kasse:besitzt
+Getraenkeautomat --> "1" Kasse
 Getraenkeautomat --> "n" Getraenkewunsch
 Getraenkeautomat --> "1" GetraenkUndWechselgeld
-Kasse --> "6" Muenzen
-
-'besondere beziehung, Komposition
-'1: eine Kasse
-
+Kasse --> "3" Muenzen
 
 @enduml

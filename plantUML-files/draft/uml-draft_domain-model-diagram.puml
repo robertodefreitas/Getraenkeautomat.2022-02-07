@@ -2,7 +2,7 @@
 'https://plantuml.com/class-diagram
 'need this into unix systems
 !pragma layout smetana
-!include uml-style.iuml
+!include ../uml-style.iuml
 '- private
 '# protected
 '~ package private
