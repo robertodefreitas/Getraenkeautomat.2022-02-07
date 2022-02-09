@@ -1,4 +1,5 @@
 @startuml
+title Klassendiagramm
 'https://plantuml.com/class-diagram
 !include uml-style.iuml
 'need this into unix systems
